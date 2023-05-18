@@ -30,22 +30,22 @@ const NoticeForm = () => {
   };
 
   const openFormWindow = () => {
-    window.open('', '_blank', 'width=400,height=400'); // Open a new window with specified dimensions
+    const newWindow = window.open('', '_blank', 'width=400,height=400'); // Open a new window with specified dimensions
+    newWindow.document.body.innerHTML = getFormMarkup(); // Inject the form markup into the new window
   };
 
-  return (
-    <div>
-      <button onClick={openFormWindow} className='noticeBtn'>Notice</button>
-      <div style={{ display: 'none' }}>
+  const getFormMarkup = () => {
+    return `
+      <div>
         <h2>Add Notice</h2>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit="event.preventDefault();">
           <div>
             <label htmlFor="topic">Topic:</label>
             <input
               type="text"
               id="topic"
-              value={topic}
-              onChange={handleTopicChange}
+              value="${topic}"
+              onChange="${handleTopicChange}"
               required
             />
           </div>
@@ -53,19 +53,25 @@ const NoticeForm = () => {
             <label htmlFor="message">Message:</label>
             <textarea
               id="message"
-              value={message}
-              onChange={handleMessageChange}
+              value="${message}"
+              onChange="${handleMessageChange}"
               required
             ></textarea>
           </div>
           <div>
             <button type="submit">Submit</button>
-            <button type="button" onClick={handleCancel}>
+            <button type="button" onclick="${handleCancel}">
               Cancel
             </button>
           </div>
         </form>
       </div>
+    `;
+  };
+
+  return (
+    <div>
+      <button onClick={openFormWindow} className='noticeBtn'>Notice</button>
     </div>
   );
 };

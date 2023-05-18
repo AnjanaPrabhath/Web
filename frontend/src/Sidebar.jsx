@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react';
 import profileImg from './img/profile.png';
 import './style.css';
-import AddMemberForm from './addMemberForm';
 
 function Sidebar() {
   const [image, setImage] = useState(profileImg);

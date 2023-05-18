@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import Sidebar from "./Sidebar";
 import AddMemberForm from './addMemberForm';
 import NoticeForm from "./noticeForm";
+import ProductListing from "./productListing";
+import CustomerListing from "./customerListing";
 
 
 function App() {
@@ -22,12 +24,12 @@ function App() {
               <NoticeForm/>
             </div>
             <div className="col-4">
-              <AddMemberForm/>
+              <ProductListing/>
             </div>
           </div>
           <div className="row">
             <div className="col-4">
-              <AddMemberForm/>
+              <CustomerListing/>
             </div>
             <div className="col-4">
               <AddMemberForm/>
