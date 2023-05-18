@@ -1,0 +1,57 @@
+
+  
+  .sidebar {
+    width: 300px;
+    /* Add other necessary styles for the sidebar */
+  }
+  
+  .form-container {
+    flex: 1;
+    /* Add other necessary styles for the form container */
+  }
+  
+
+.btn-primary1{
+    background-color: rgb(172, 209, 172);
+    color: black;
+    width: 120px;
+    height: auto;
+}
+
+.btn-primary1 a:hover{
+    background-color: rgb(172, 209, 172);
+}
+
+.btn-danger{
+    background-color: rgb(172, 209, 172);
+    color: black;
+    width: 120px;
+    height: auto;
+}
+
+.bg-white{
+    background-color: aqua;
+    width: 150px;
+}
+
+/* addinf members */
+
+.addMemberForm {
+    display: flex;
+}
+
+.add-member-button {
+    margin: 60px 50px;
+    width: 250px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    text-align: center;
+  }
+  
+  /* You can customize the button's appearance further */
+  .add-member-button button {
+    /* Add your button styles here */
+  }
