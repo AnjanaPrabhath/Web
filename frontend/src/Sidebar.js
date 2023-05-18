@@ -65,7 +65,7 @@ function Sidebar() {
         <div className='d-grid gap-2'>
           <button className='btn btn-success'>
             <i className='bi bi-speedometer2 fs-5 me-2'></i>
-            <span className='fs-5'>git eka vada</span>
+            <span className='fs-5'>Dashboard</span>
           </button>
           <button className='btn btn-success'>
             <i className='bi bi-clipboard-data fs-5 me-2'></i>
