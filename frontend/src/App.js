@@ -2,6 +2,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Sidebar from "./Sidebar";
 import AddMemberForm from './addMemberForm';
+import NoticeForm from "./noticeForm";
 
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
               <AddMemberForm/>
             </div>
             <div className="col-4">
-              <AddMemberForm/>
+              <NoticeForm/>
             </div>
             <div className="col-4">
               <AddMemberForm/>

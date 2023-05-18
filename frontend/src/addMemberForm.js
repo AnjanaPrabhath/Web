@@ -124,7 +124,7 @@ function AddMemberForm() {
   return (
     <div className='formBtn'>
       {!showForm && (
-        <button className="add-member-button" onClick={handleAddMemberClick}>Add Member</button>
+        <button className="add-member-button" onClick={handleAddMemberClick}>Employee Management</button>
       )}
     </div>
   );
