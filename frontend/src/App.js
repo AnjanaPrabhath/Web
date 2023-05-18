@@ -5,6 +5,7 @@ import AddMemberForm from './addMemberForm';
 import NoticeForm from "./noticeForm";
 import ProductListing from "./productListing";
 import CustomerListing from "./customerListing";
+import LivestockListing from "./livestockListing";
 
 
 function App() {
@@ -15,7 +16,8 @@ function App() {
           <Sidebar/>
         </div>
         <div className="col-10">
-          <h2 className="mt-3 ml-15">Admin Dashboard Quick Checking</h2>
+          <h2 className="mt-3 ml-15" >Admin Dashboard Quick Checking</h2>
+          <hr></hr>
           <div className="row">
             <div className="col-4">
               <AddMemberForm/>
@@ -32,7 +34,7 @@ function App() {
               <CustomerListing/>
             </div>
             <div className="col-4">
-              <AddMemberForm/>
+              <LivestockListing/>
             </div>
             <div className="col-4">
               <AddMemberForm/>
