@@ -141,7 +141,7 @@ function AddMemberForm() {
           Add Member
         </button>
         <button
-          type="button"
+          type="reset"
           className="btn btn-secondary ms-2"
           onClick={() => {
             setDisableInput(false);
