@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './style.css';
+import axios from 'axios';
 
 function AddMemberForm() {
   const [name, setName] = useState('');
@@ -8,18 +8,9 @@ function AddMemberForm() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
-  const handleAddMemberClick = () => {
-    const newWindow = window.open('', '_blank', 'width=500,height=500'); // Open a new window
-    const formMarkup = getFormMarkup();
-    newWindow.document.write(formMarkup); // Write the form markup into the new window document
-  };
-
-  const handleCancelClick = () => {
-    setPasswordError('');
-  };
-
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== confirmPassword) {
@@ -27,110 +18,106 @@ function AddMemberForm() {
       return;
     }
 
-    console.log('Name:', name);
-    console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
-    console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
+    try {
+      const response = await axios.post('http://localhost:8070/employee/add', {
+        name,
+        email,
+        phoneNumber,
+        password,
+        confirmPassword,
+      });
 
-    setName('');
-    setEmail('');
-    setPhoneNumber('');
-    setPassword('');
-    setConfirmPassword('');
-    setPasswordError('');
+      console.log('New employee:', response.data);
+
+      setSuccessMessage('Employee added successfully');
+      setName('');
+      setEmail('');
+      setPhoneNumber('');
+      setPassword('');
+      setConfirmPassword('');
+      setPasswordError('');
+    } catch (error) {
+      console.error('Error adding employee:', error);
+    }
   };
 
   const handlePhoneNumberChange = (e) => {
     const input = e.target.value;
-    const isValidPhoneNumber = /^\+[0-9]*$/.test(input);
+    // const isValidPhoneNumber = /^\+[0-9]*$/.test(input);
+    const isValidPhoneNumber = /^0[0-9]*$/.test(input);
+
 
     if (isValidPhoneNumber || input === '') {
       setPhoneNumber(input);
     }
   };
 
-  const getFormMarkup = () => {
-    return `
-      <html>
-        <head>
-          <title>Add Member Form</title>
-          <style>
-            /* Add your custom styles here */
-          </style>
-        </head>
-        <body>
-          <div class="addMemberForm">
-            <form onsubmit="event.preventDefault(); ${handleSubmit.toString()}">
-              <h2>Add Member Form</h2>
-              <div>
-                <label for="name">Name:</label>
-                <input
-                  type="text"
-                  id="name"
-                  value="${name}"
-                  onchange="event.target.value && ${setName.toString()}(event.target.value)"
-                  required
-                />
-              </div>
-              <div>
-                <label for="email">Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  value="${email}"
-                  onchange="event.target.value && ${setEmail.toString()}(event.target.value)"
-                  required
-                />
-              </div>
-              <div>
-                <label for="phoneNumber">Phone Number:</label>
-                <input
-                  type="text"
-                  id="phoneNumber"
-                  value="${phoneNumber}"
-                  onchange="event.target.value && ${handlePhoneNumberChange.toString()}(event)"
-                  required
-                />
-              </div>
-              <div>
-                <label for="password">Password:</label>
-                <input
-                  type="password"
-                  id="password"
-                  value="${password}"
-                  onchange="event.target.value && ${setPassword.toString()}(event.target.value)"
-                  minlength="5"
-                  required
-                />
-              </div>
-              <div>
-                <label for="confirmPassword">Confirm Password:</label>
-                <input
-                  type="password"
-                  id="confirmPassword"
-                  value="${confirmPassword}"
-                  onchange="event.target.value && ${setConfirmPassword.toString()}(event.target.value)"
-                  minlength="5"
-                  required
-                />
-              </div>
-              ${passwordError ? `<p class="error">${passwordError}</p>` : ''}
-              <br />
-              <button type="submit">Add Member</button>
-              <button onclick="${handleCancelClick.toString()}">Cancel</button>
-            </form>
-          </div>
-        </body>
-      </html>
-    `;
-  };
-
   return (
-    <div className="formBtn">
-      <button className="add-member-button" onClick={handleAddMemberClick}>
-        Employee Management
-      </button>
+    <div className="container mt-4">
+      <h2>Add Member Form</h2>
+      {successMessage && <div className="alert alert-success">{successMessage}</div>}
+      <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">Name:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="email" className="form-label">Email:</label>
+          <input
+            type="email"
+            className="form-control"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="phoneNumber" className="form-label">Phone Number:</label>
+          <input
+            type="text"
+            className="form-control"
+            id="phoneNumber"
+            value={phoneNumber}
+            onChange={handlePhoneNumberChange}
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="password" className="form-label">Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            id="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            minLength="5"
+            required
+          />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="confirmPassword" className="form-label">Confirm Password:</label>
+          <input
+            type="password"
+            className="form-control"
+            id="confirmPassword"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            minLength="5"
+            required
+          />
+        </div>
+        {passwordError && <p className="text-danger">{passwordError}</p>}
+        <button type="submit" className="btn btn-primary">Add Member</button>
+        <button type="button" className="btn btn-secondary ms-2" onClick={() => setSuccessMessage('')}>Clear</button>
+      </form>
     </div>
   );
 }
